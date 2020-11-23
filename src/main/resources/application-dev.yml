@@ -1,0 +1,52 @@
+
+
+###mybatis-plus 配置
+mybatis-plus:
+  mapper-locations: classpath:mapper/*.xml
+  type-aliases-package: work.aijiu.*.entity
+  global-config:
+    db-config:
+      table-underline: true
+      db-type: mysql
+  configuration:
+    log-impl: org.apache.ibatis.logging.stdout.StdOutImpl
+
+
+###druid 数据库连接池
+spring:
+  datasource:
+    username: root
+    password: LHJlhj0316@
+    url: jdbc:mysql://121.36.156.106:3306/aj-springboot?userSSL=true&useUnicode=true&characterEncoding=UTF8&serverTimezone=UTC
+    driver-class-name: com.mysql.cj.jdbc.Driver
+    type: com.alibaba.druid.pool.DruidDataSource
+    #   数据源其他配置
+    initialSize: 5
+    minIdle: 5
+    maxActive: 20
+    maxWait: 60000
+    timeBetweenEvictionRunsMillis: 60000
+    minEvictableIdleTimeMillis: 300000
+    validationQuery: SELECT 1 FROM DUAL
+    testWhileIdle: true
+    testOnBorrow: false
+    testOnReturn: false
+    poolPreparedStatements: true
+    #   配置监控统计拦截的filters，去掉后监控界面sql无法统计，'wall'用于防火墙
+    filters: stat,wall,log4j
+    maxPoolPreparedStatementPerConnectionSize: 20
+    useGlobalDataSourceStat: true
+    connectionProperties: druid.stat.mergeSql=true;druid.stat.slowSqlMillis=500
+
+######################################
+########### 控制台打印SQL语句
+######################################
+logging:
+  level:
+    root: warn
+    work.aijiu.mybatisplus.dao: trace
+  pattern:
+    console: '%p%m%n'
+
+server:
+  port: 8080

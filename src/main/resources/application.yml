@@ -1,0 +1,5 @@
+###模式匹配
+spring:
+  profiles:
+    # 环境dev | test | prod
+    active: dev
