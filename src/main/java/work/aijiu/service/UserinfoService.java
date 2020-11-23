@@ -2,6 +2,7 @@ package work.aijiu.service;
 
 import work.aijiu.entity.Userinfo;
 import java.util.List;
+import java.util.Map;
 
 /**
  * (Userinfo)表服务接口
@@ -18,4 +19,24 @@ public interface UserinfoService {
      */
     Userinfo addUser(Userinfo userinfo);
 
+    /**
+     * 根据id 删除用户
+     * @param id
+     * @return
+     */
+    Map<String,Object> delUser(long id);
+
+    /**
+     * 更新用户
+     * @param userinfo
+     * @return
+     */
+    Userinfo updateUser(Userinfo userinfo);
+
+    /**
+     * 用户详情
+     * @param id
+     * @return
+     */
+    Userinfo userDetails(long id);
 }
