@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>登录界面</title>
+</head>
+<body>
+<p>权限管理系统</p> <br>
+<span>用户名：</span> <input type="text" name="username" id="username"> <br>
+<span>密  码：</span> <input type="password" name="password" id="password"><br>
+<input type="radio" value="0" name="rem">不记住
+<input type="radio" value="1" name="rem">记住 <br>
+<button onclick="loginHandler()">登录</button>
+
+<script src="https://code.jquery.com/jquery-3.4.1.min.js"></script>
+<script>
+
+    
+    function loginHandler() {
+        var user = {};
+        user.username = $('#username').val();
+        user.password = $('#password').val();
+        user.rememberMe = $('input[type=radio][name=rem]:checked').val();
+        console.log(user)
+        $.ajax({
+            type: 'post',
+            url: '/auth/login',
+            data: JSON.stringify(user),
+            dataType:'json',
+            contentType:'application/json',
+            success: function (data,xhr,response) {
+                data ? window.location.href = '/index' : window.alert("账号或密码错误");
+            }
+        });
+    }
+</script>
+</body>
+</html>

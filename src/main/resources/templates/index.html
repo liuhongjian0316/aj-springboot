@@ -1,0 +1,89 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>首页</title>
+</head>
+<body>
+<span id="username">张三</span>
+<button id="getBtn">任务列表</button>
+<button id="createBtn">创建任务</button>
+<button id="putBtn">更新任务</button>
+<button id="deleteBtn">删除任务</button>
+<a href="/logout">登出</a>
+</body>
+<script src="https://code.jquery.com/jquery-3.4.1.min.js"></script>
+<script>
+    let username = null;
+    let userToken = null;
+    $.ajax({
+        type: 'get',
+        url: '/getUsername',
+        dataType:'json',
+        contentType:'application/json',
+        async: 'false',
+        success: function (data) {
+           $("#username").html(data.username);
+            username = data.username;
+            $.ajax({
+                type: 'get',
+                url: '/getToken?username='+username,
+                dataType:'json',
+                contentType:'application/json',
+                async: 'false',
+                success: function (data) {
+                    userToken = data.token;
+                    $("#createBtn").click(function () {
+                        $.ajax({
+                            type: 'post',
+                            url: '/tasks',
+                            contentType:'application/text',
+                            headers:{"Authorization": userToken},
+                            success: function (data) {
+                                window.alert(data);
+                            }
+                        });
+                    });
+                    $("#putBtn").click(function () {
+                        $.ajax({
+                            type: 'put',
+                            url: '/tasks/1',
+                            contentType:'application/text',
+                            headers:{"Authorization": userToken},
+                            success: function (data) {
+                                window.alert(data);
+                            }
+                        });
+                    });
+                    $("#deleteBtn").click(function () {
+                        $.ajax({
+                            type: 'delete',
+                            url: '/tasks/1',
+                            contentType:'application/text',
+                            headers:{"Authorization": userToken},
+                            success: function (data) {
+                                window.alert(data);
+                            }
+                        });
+                    });
+                    $("#getBtn").click(function () {
+                        $.ajax({
+                            type: 'get',
+                            url: '/tasks',
+                            contentType:'application/text',
+                            headers:{"Authorization": userToken},
+                            success: function (data) {
+                                window.alert(data);
+                            }
+                        });
+                    });
+                }
+            });
+        }
+    });
+
+
+
+
+</script>
+</html>

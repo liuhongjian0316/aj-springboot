@@ -9,6 +9,7 @@ import io.swagger.annotations.ApiImplicitParam;
 import io.swagger.annotations.ApiImplicitParams;
 import io.swagger.annotations.ApiOperation;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import work.aijiu.entity.Userinfo;
 import work.aijiu.service.UserinfoService;
 import org.springframework.web.bind.annotation.*;
@@ -32,6 +33,10 @@ public class UserinfoController {
     @Autowired
     private UserinfoService userinfoService;
 
+    @Autowired
+    private BCryptPasswordEncoder bCryptPasswordEncoder;
+
+
     /**
      * 注册
      * @param userinfo
@@ -43,6 +48,7 @@ public class UserinfoController {
     })
     @PostMapping("add")
     public Userinfo rigester(@RequestBody Userinfo userinfo){
+        userinfo.setPassword(bCryptPasswordEncoder.encode(userinfo.getPassword()));
         return userinfoService.addUser(userinfo);
     }
 
