@@ -1,5 +1,7 @@
 package work.aijiu.service;
 
+import com.baomidou.mybatisplus.core.metadata.IPage;
+import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
 import work.aijiu.entity.Userinfo;
 import java.util.List;
 import java.util.Map;
@@ -39,4 +41,17 @@ public interface UserinfoService {
      * @return
      */
     Userinfo userDetails(long id);
+
+    /**
+     * 用户分页
+     * @param page
+     * @return
+     */
+    IPage<Userinfo> userPage(Page<Userinfo> page);
+
+    /**
+     * 查询全部用户
+     * @return
+     */
+    List<Userinfo> queryAll();
 }

@@ -20,7 +20,7 @@
         <mybatis-plus.version>3.3.1</mybatis-plus.version>
         <druid.version>1.1.21</druid.version>
         <commons-long3.version>3.9</commons-long3.version>
-        <pagehelper.version>5.1.11</pagehelper.version>
+        <pagehelper.version>5.2.0</pagehelper.version>
         <pegdown.version>1.6.0</pegdown.version>
         <shiro.version>1.5.1</shiro.version>
         <thymeleaf-extras-shiro.version>2.0.0</thymeleaf-extras-shiro.version>
@@ -71,6 +71,18 @@
             <groupId>org.freemarker</groupId>
             <artifactId>freemarker</artifactId>
             <version>2.3.30</version>
+        </dependency>
+        <!--pagehelper5-->
+        <dependency>
+            <groupId>com.github.pagehelper</groupId>
+            <artifactId>pagehelper</artifactId>
+            <version>${pagehelper.version}</version>
+        </dependency>
+        <!--swagger3 -->
+        <dependency>
+            <groupId>io.springfox</groupId>
+            <artifactId>springfox-boot-starter</artifactId>
+            <version>3.0.0</version>
         </dependency>
         <!--阿里druid-->
         <dependency>

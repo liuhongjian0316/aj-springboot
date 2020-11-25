@@ -1,5 +1,8 @@
 package work.aijiu.service.impl;
 
+import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
+import com.baomidou.mybatisplus.core.metadata.IPage;
+import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.transaction.annotation.Transactional;
 import org.springframework.transaction.interceptor.TransactionAspectSupport;
@@ -71,6 +74,7 @@ public class UserinfoServiceImpl implements UserinfoService {
         return null;
     }
 
+    @Transactional(rollbackFor = Exception.class)
     @Override
     public Userinfo userDetails(long id) {
         try {
@@ -79,6 +83,18 @@ public class UserinfoServiceImpl implements UserinfoService {
             TransactionAspectSupport.currentTransactionStatus().setRollbackOnly();
         }
         return null;
+    }
+
+    @Override
+    public IPage<Userinfo> userPage(Page<Userinfo> page) {
+        QueryWrapper<Userinfo> wrapper = new QueryWrapper<>();
+        return userinfoDao.selectPage(page,wrapper);
+    }
+
+    @Override
+    public List<Userinfo> queryAll() {
+        QueryWrapper<Userinfo> wrapper = new QueryWrapper<>();
+        return userinfoDao.selectList(wrapper);
     }
 
 }
