@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
 <head>
     <meta charset="UTF-8">
     <title>登录界面</title>
@@ -12,16 +12,25 @@
 <input type="radio" value="1" name="rem">记住 <br>
 <button onclick="loginHandler()">登录</button>
 
+<h1 th:text="${info}" />
+<div>
+    <!-- <img alt="这是图片" src="/img/001.png"/> -->
+    <img alt="验证码" onclick = "this.src='/code/generate?d='+new Date()*1" src="/code/generate" />
+</div>
+<form action="/code/validation">
+    <input type="text" name="vrifyCode" />
+    <input type="submit" value="提交"></input>
+</form>
+
+
 <script src="https://code.jquery.com/jquery-3.4.1.min.js"></script>
 <script>
 
-    
     function loginHandler() {
         var user = {};
         user.username = $('#username').val();
         user.password = $('#password').val();
         user.rememberMe = $('input[type=radio][name=rem]:checked').val();
-        console.log(user)
         $.ajax({
             type: 'post',
             url: '/auth/login',
@@ -29,7 +38,11 @@
             dataType:'json',
             contentType:'application/json',
             success: function (data,xhr,response) {
-                data ? window.location.href = '/index' : window.alert("账号或密码错误");
+                data ? window.location.href = '/index' : window.alert("账号或密码错误"+data);
+            },
+            error: function (jqXHR, textStatus, errorThrown) {
+                console.log(jqXHR.responseText)
+                window.alert("账号或密码错误")
             }
         });
     }

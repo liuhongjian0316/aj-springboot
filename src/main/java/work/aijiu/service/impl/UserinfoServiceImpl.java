@@ -97,4 +97,11 @@ public class UserinfoServiceImpl implements UserinfoService {
         return userinfoDao.selectList(wrapper);
     }
 
+    @Override
+    public List<Userinfo> queryByMoblie(String moblie) {
+        QueryWrapper<Userinfo> wrapper = new QueryWrapper<>();
+        wrapper.lambda().eq(Userinfo::getMobile,moblie);
+        return userinfoDao.selectList(wrapper);
+    }
+
 }

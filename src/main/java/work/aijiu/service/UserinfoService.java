@@ -54,4 +54,11 @@ public interface UserinfoService {
      * @return
      */
     List<Userinfo> queryAll();
+
+    /**
+     * 根据手机号查询用户
+     * @param moblie
+     * @return
+     */
+    List<Userinfo> queryByMoblie(String moblie);
 }

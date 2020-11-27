@@ -53,11 +53,20 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
         http.cors().and().csrf().disable()
                 .authorizeRequests()
                 // http.permitAll不会绕开springsecurity验证，相当于是允许该路径通过
+                .antMatchers("/druid/**").permitAll()
+                .antMatchers("/swagger-ui/**").permitAll()
+                .antMatchers("/").permitAll()
+                .antMatchers("/index").permitAll()
+                .antMatchers("/login").permitAll()
+                .antMatchers("/getUsername").permitAll()
+                .antMatchers("/getToken").permitAll()
+                .antMatchers("/code/generate").permitAll()
+                .antMatchers("/code/validation").permitAll()
                 .antMatchers(HttpMethod.DELETE, "/tasks/**").hasRole("ADMIN")
                 // 测试用资源，需要验证了的用户才能访问
                 .antMatchers("/tasks/**").authenticated()
                 // 其他都放行了
-                .anyRequest().permitAll()
+                .anyRequest().authenticated()
                 .and()
                 .addFilter(new JWTAuthenticationFilter(authenticationManager()))
                 .addFilter(new JWTAuthorizationFilter(authenticationManager()))

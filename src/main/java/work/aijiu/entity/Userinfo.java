@@ -3,6 +3,7 @@ package work.aijiu.entity;
 import com.baomidou.mybatisplus.annotation.IdType;
 import com.baomidou.mybatisplus.annotation.TableField;
 import com.baomidou.mybatisplus.annotation.TableId;
+import lombok.Data;
 
 import java.io.Serializable;
 
@@ -12,6 +13,7 @@ import java.io.Serializable;
  * @author makejava
  * @since 2020-11-23 15:14:08
  */
+@Data
 public class Userinfo implements Serializable {
     private static final long serialVersionUID = 751057039383913906L;
     /**
@@ -35,6 +37,10 @@ public class Userinfo implements Serializable {
     * 角色
     */
     private String role;
+    /**
+     * 手机号
+     */
+    private String mobile;
 
 
     public Long getId() {
@@ -77,4 +83,11 @@ public class Userinfo implements Serializable {
         this.role = role;
     }
 
+    public String getMobile() {
+        return mobile;
+    }
+
+    public void setMobile(String mobile) {
+        this.mobile = mobile;
+    }
 }
